@@ -11,9 +11,12 @@
 		BF6491012042F6D600E2E8EB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6491002042F6D600E2E8EB /* ViewController.swift */; };
 		BF6491042042F6D600E2E8EB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF6491022042F6D600E2E8EB /* Main.storyboard */; };
 		BF6491062042F6D600E2E8EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF6491052042F6D600E2E8EB /* Assets.xcassets */; };
-		BF6491092042F6D600E2E8EB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF6491072042F6D600E2E8EB /* LaunchScreen.storyboard */; };
 		BF6491142042F6D600E2E8EB /* MiccoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6491132042F6D600E2E8EB /* MiccoTests.swift */; };
 		BF64911F2042F6D600E2E8EB /* MiccoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF64911E2042F6D600E2E8EB /* MiccoUITests.swift */; };
+		BF99D3012043460C007739E0 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF99D3002043460C007739E0 /* ImageViewController.swift */; };
+		BFA9CE9C20432CCF0073D050 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA9CE9B20432CCF0073D050 /* CollectionViewCell.swift */; };
+		BFC577FB2045375200C2DA7C /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFC577FA2045375200C2DA7C /* Launch Screen.storyboard */; };
+		BFC577FD20454A3500C2DA7C /* GalleryImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC577FC20454A3500C2DA7C /* GalleryImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,7 +42,6 @@
 		BF6491002042F6D600E2E8EB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		BF6491032042F6D600E2E8EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BF6491052042F6D600E2E8EB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		BF6491082042F6D600E2E8EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BF64910A2042F6D600E2E8EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BF64910F2042F6D600E2E8EB /* MiccoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MiccoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF6491132042F6D600E2E8EB /* MiccoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiccoTests.swift; sourceTree = "<group>"; };
@@ -47,6 +49,10 @@
 		BF64911A2042F6D600E2E8EB /* MiccoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MiccoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF64911E2042F6D600E2E8EB /* MiccoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiccoUITests.swift; sourceTree = "<group>"; };
 		BF6491202042F6D600E2E8EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BF99D3002043460C007739E0 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
+		BFA9CE9B20432CCF0073D050 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		BFC577FA2045375200C2DA7C /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		BFC577FC20454A3500C2DA7C /* GalleryImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,8 +107,11 @@
 				BF6491002042F6D600E2E8EB /* ViewController.swift */,
 				BF6491022042F6D600E2E8EB /* Main.storyboard */,
 				BF6491052042F6D600E2E8EB /* Assets.xcassets */,
-				BF6491072042F6D600E2E8EB /* LaunchScreen.storyboard */,
 				BF64910A2042F6D600E2E8EB /* Info.plist */,
+				BFA9CE9B20432CCF0073D050 /* CollectionViewCell.swift */,
+				BF99D3002043460C007739E0 /* ImageViewController.swift */,
+				BFC577FA2045375200C2DA7C /* Launch Screen.storyboard */,
+				BFC577FC20454A3500C2DA7C /* GalleryImage.swift */,
 			);
 			path = Micco;
 			sourceTree = "<group>";
@@ -232,7 +241,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF6491092042F6D600E2E8EB /* LaunchScreen.storyboard in Resources */,
+				BFC577FB2045375200C2DA7C /* Launch Screen.storyboard in Resources */,
 				BF6491062042F6D600E2E8EB /* Assets.xcassets in Resources */,
 				BF6491042042F6D600E2E8EB /* Main.storyboard in Resources */,
 			);
@@ -261,6 +270,9 @@
 			files = (
 				BF6491012042F6D600E2E8EB /* ViewController.swift in Sources */,
 				BF6490FF2042F6D600E2E8EB /* AppDelegate.swift in Sources */,
+				BFC577FD20454A3500C2DA7C /* GalleryImage.swift in Sources */,
+				BF99D3012043460C007739E0 /* ImageViewController.swift in Sources */,
+				BFA9CE9C20432CCF0073D050 /* CollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,14 +314,6 @@
 				BF6491032042F6D600E2E8EB /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		BF6491072042F6D600E2E8EB /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BF6491082042F6D600E2E8EB /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -430,7 +434,7 @@
 				DEVELOPMENT_TEAM = 8M4G4EW8QQ;
 				INFOPLIST_FILE = Micco/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = de.pueski.micco.Micco;
+				PRODUCT_BUNDLE_IDENTIFIER = de.pueski.micco;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -445,7 +449,7 @@
 				DEVELOPMENT_TEAM = 8M4G4EW8QQ;
 				INFOPLIST_FILE = Micco/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = de.pueski.micco.Micco;
+				PRODUCT_BUNDLE_IDENTIFIER = de.pueski.micco;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
