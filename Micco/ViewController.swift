@@ -139,6 +139,34 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         showImagePickerForCamera(cameraButton!);
     }
     
+    @IBAction func copyToGallery(_ sender: UIBarButtonItem) {
+        
+        let indexPaths = self.imageGrid?.indexPathsForSelectedItems;
+        
+        for path in indexPaths! {
+            
+            var image = gallery[path.first!];
+            UIImageWriteToSavedPhotosAlbum(image.image!,self,#selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+        
+        }
+
+    }
+    
+    
+    //MARK: - Add image to Library
+    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        if let error = error {
+            // we got back an error!
+            let ac = UIAlertController(title: "Save error", message: error.localizedDescription, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
+        } else {
+            let ac = UIAlertController(title: "Saved!", message: "Your altered image has been saved to your photos.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
+        }
+    }
+    
     @IBAction func deleteSelected(_ sender: UIBarButtonItem) {
 
         let indexPaths = self.imageGrid?.indexPathsForSelectedItems;
@@ -156,8 +184,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }) { (finished) in
             // self.imageGrid?.reloadItems(at: (self.imageGrid?.indexPathsForVisibleItems)!)
         }
-       
-
     }
     
     func removeImage(filePath: String) {

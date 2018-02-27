@@ -32,6 +32,11 @@
                                             <action selector="deleteSelected:" destination="BYZ-38-t0r" id="rcr-PJ-r54"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem title="Copy" id="CZc-dn-QdY">
+                                        <connections>
+                                            <action selector="copyToGallery:" destination="BYZ-38-t0r" id="gPT-oS-AaH"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                                 <color key="tintColor" red="0.99028533551535902" green="0.98435548320688382" blue="0.99621518782383423" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </toolbar>
