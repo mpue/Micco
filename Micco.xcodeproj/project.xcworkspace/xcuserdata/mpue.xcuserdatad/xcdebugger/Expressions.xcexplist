@@ -3,12 +3,34 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "ViewController.imageTapped(tapGestureRecognizer:):ViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.currentCell">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "ViewController.prepare(for:sender:):ViewController.swift">
          <PersistentStrings>
             <PersistentString
                value = "self.currentCell.image.image">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.deleteSelected(_:):ViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "gallery">
+            </PersistentString>
+            <PersistentString
+               value = "cell">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.collectionView(_:numberOfItemsInSection:):ViewController.swift">
       </ContextState>
       <ContextState
          contextName = "ViewController.collectionView(_:cellForItemAt:):ViewController.swift">
@@ -24,14 +46,6 @@
             </PersistentString>
             <PersistentString
                value = "indexPath">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ViewController.imageTapped(tapGestureRecognizer:):ViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.currentCell">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

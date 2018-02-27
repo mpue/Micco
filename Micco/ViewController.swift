@@ -33,11 +33,24 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         imageGrid?.dataSource = self;
         imageGrid?.delegate = self;
         
+        imageGrid?.minimumZoomScale = 1.0
+        imageGrid?.maximumZoomScale = 6.0
+        
+        
         // Remove the camera button if the camera is not currently available.
         if !UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
             toolbarItems = self.toolbarItems?.filter { $0 != cameraButton }
         }
         
+        self.imageGrid?.isUserInteractionEnabled = true;
+        self.imageGrid?.allowsMultipleSelection = true;
+        
+        let lpgr = UILongPressGestureRecognizer(target: self, action: #selector(self.handleLongPress))
+        self.imageGrid?.addGestureRecognizer(lpgr);
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.imageTapped))
+        self.imageGrid?.addGestureRecognizer(tapGestureRecognizer);
+    
         loadThumbnails();
 
     }
@@ -60,6 +73,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                     let galleryImage = GalleryImage();
                     galleryImage.thumb = thumb;
                     galleryImage.image = image;
+                    galleryImage.imagePath = url.path;
+                    galleryImage.thumbPath = thumbPath;
                     gallery.append(galleryImage);
                     
                 }
@@ -71,17 +86,48 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
     
-    @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
+    @objc func imageTapped(gesture: UITapGestureRecognizer)
     {
-        self.currentCell = tapGestureRecognizer.view as! CollectionViewCell
-        self.performSegue(withIdentifier: "showImage", sender: self.currentCell);
-        // Your action
+        
+        if gesture.state != .ended {
+            return
+        }
+        let p = gesture.location(in: self.imageGrid)
+        
+        if let indexPath = self.imageGrid?.indexPathForItem(at: p) {
+            // get the cell at indexPath (the one you long pressed)
+            let cell = self.imageGrid?.cellForItem(at: indexPath)
+            self.currentCell = cell as! CollectionViewCell
+            self.currentCell.imageIndex =  indexPath.first;
+            self.performSegue(withIdentifier: "showImage", sender: self.currentCell);
+            
+        } else {
+            print("couldn't find index path")
+        }
+
+    }
+    
+    @objc func handleLongPress(gesture : UILongPressGestureRecognizer!) {
+        if gesture.state != .ended {
+            return
+        }
+        let p = gesture.location(in: self.imageGrid)
+        
+        if let indexPath = self.imageGrid?.indexPathForItem(at: p) {
+            // get the cell at indexPath (the one you long pressed)
+            let cell = self.imageGrid?.cellForItem(at: indexPath)
+            self.imageGrid?.selectItem(at: indexPath, animated: true, scrollPosition: UICollectionViewScrollPosition.centeredHorizontally)
+ 
+        } else {
+            print("couldn't find index path")
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let controller = segue.destination as? ImageViewController;
         // self.navigationController?.pushViewController(self, animated: true)
         let cell = sender as! CollectionViewCell;
+        controller?.gallery = self.gallery;
         controller?.photo = (cell.fullImage?.image)!;
         
     }
@@ -91,6 +137,44 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     @IBAction func showCamera(_ sender: UIBarButtonItem) {
         showImagePickerForCamera(cameraButton!);
+    }
+    
+    @IBAction func deleteSelected(_ sender: UIBarButtonItem) {
+
+        let indexPaths = self.imageGrid?.indexPathsForSelectedItems;
+        
+        for path in indexPaths! {
+            
+            var image = gallery[path.first!];
+            
+            removeImage(filePath: image.imagePath!);
+            removeImage(filePath: image.thumbPath!);
+            self.gallery.remove(at: path.first!);
+        }
+        self.imageGrid?.performBatchUpdates({
+             self.imageGrid?.deleteItems(at: indexPaths!)
+        }) { (finished) in
+            // self.imageGrid?.reloadItems(at: (self.imageGrid?.indexPathsForVisibleItems)!)
+        }
+       
+
+    }
+    
+    func removeImage(filePath: String) {
+        let fileManager = FileManager.default
+        let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory
+        let nsUserDomainMask = FileManager.SearchPathDomainMask.userDomainMask
+        let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
+        guard let dirPath = paths.first else {
+            return
+        }
+
+        do {
+            try fileManager.removeItem(atPath: filePath)
+        } catch let error as NSError {
+            print(error.debugDescription)
+        }
+        
     }
     
     @IBAction func backToMain(_ sender: UIBarButtonItem) {
@@ -231,11 +315,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionViewCell", for: indexPath) as! CollectionViewCell
         
-        if (cell.gestureRecognizers?.count == nil) {
-            var tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
-            cell.addGestureRecognizer(tapGestureRecognizer);
-        }
-        
         if (indexPath.row < `self`.gallery.count) {
             cell.fullImage = self.gallery[indexPath.row]
             cell.displayContent( img : self.gallery[indexPath.row]);
@@ -243,6 +322,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         return cell;
     }
+    
     
 
 }

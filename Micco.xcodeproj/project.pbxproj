@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BF0165B82045DD0E00DA1D7F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF0165B72045DD0E00DA1D7F /* Assets.xcassets */; };
 		BF6490FF2042F6D600E2E8EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6490FE2042F6D600E2E8EB /* AppDelegate.swift */; };
 		BF6491012042F6D600E2E8EB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6491002042F6D600E2E8EB /* ViewController.swift */; };
 		BF6491042042F6D600E2E8EB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF6491022042F6D600E2E8EB /* Main.storyboard */; };
-		BF6491062042F6D600E2E8EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF6491052042F6D600E2E8EB /* Assets.xcassets */; };
 		BF6491142042F6D600E2E8EB /* MiccoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6491132042F6D600E2E8EB /* MiccoTests.swift */; };
 		BF64911F2042F6D600E2E8EB /* MiccoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF64911E2042F6D600E2E8EB /* MiccoUITests.swift */; };
 		BF99D3012043460C007739E0 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF99D3002043460C007739E0 /* ImageViewController.swift */; };
@@ -37,11 +37,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BF0165B72045DD0E00DA1D7F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BF6490FB2042F6D600E2E8EB /* Micco.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Micco.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF6490FE2042F6D600E2E8EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BF6491002042F6D600E2E8EB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		BF6491032042F6D600E2E8EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		BF6491052042F6D600E2E8EB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BF64910A2042F6D600E2E8EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BF64910F2042F6D600E2E8EB /* MiccoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MiccoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF6491132042F6D600E2E8EB /* MiccoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiccoTests.swift; sourceTree = "<group>"; };
@@ -106,12 +106,12 @@
 				BF6490FE2042F6D600E2E8EB /* AppDelegate.swift */,
 				BF6491002042F6D600E2E8EB /* ViewController.swift */,
 				BF6491022042F6D600E2E8EB /* Main.storyboard */,
-				BF6491052042F6D600E2E8EB /* Assets.xcassets */,
 				BF64910A2042F6D600E2E8EB /* Info.plist */,
 				BFA9CE9B20432CCF0073D050 /* CollectionViewCell.swift */,
 				BF99D3002043460C007739E0 /* ImageViewController.swift */,
 				BFC577FA2045375200C2DA7C /* Launch Screen.storyboard */,
 				BFC577FC20454A3500C2DA7C /* GalleryImage.swift */,
+				BF0165B72045DD0E00DA1D7F /* Assets.xcassets */,
 			);
 			path = Micco;
 			sourceTree = "<group>";
@@ -242,7 +242,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BFC577FB2045375200C2DA7C /* Launch Screen.storyboard in Resources */,
-				BF6491062042F6D600E2E8EB /* Assets.xcassets in Resources */,
+				BF0165B82045DD0E00DA1D7F /* Assets.xcassets in Resources */,
 				BF6491042042F6D600E2E8EB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

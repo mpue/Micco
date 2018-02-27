@@ -12,5 +12,7 @@ class GalleryImage {
     
     var thumb : UIImage?;
     var image : UIImage?;
+    var thumbPath : String?;
+    var imagePath : String?;
     
 }
