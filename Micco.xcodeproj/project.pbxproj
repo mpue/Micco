@@ -17,6 +17,8 @@
 		BFC1FB4120469BD900BC5A6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFC1FB4020469BD900BC5A6C /* Assets.xcassets */; };
 		BFC577FB2045375200C2DA7C /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFC577FA2045375200C2DA7C /* Launch Screen.storyboard */; };
 		BFC577FD20454A3500C2DA7C /* GalleryImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC577FC20454A3500C2DA7C /* GalleryImage.swift */; };
+		BFD1BF9D2047431E00BB2A8B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD1BF9C2047431E00BB2A8B /* SettingsViewController.swift */; };
+		BFD1BF9F2047492B00BB2A8B /* MiccoSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD1BF9E2047492B00BB2A8B /* MiccoSettings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,8 @@
 		BFC1FB4020469BD900BC5A6C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BFC577FA2045375200C2DA7C /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		BFC577FC20454A3500C2DA7C /* GalleryImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryImage.swift; sourceTree = "<group>"; };
+		BFD1BF9C2047431E00BB2A8B /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		BFD1BF9E2047492B00BB2A8B /* MiccoSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiccoSettings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +116,8 @@
 				BF99D3002043460C007739E0 /* ImageViewController.swift */,
 				BFC577FA2045375200C2DA7C /* Launch Screen.storyboard */,
 				BFC577FC20454A3500C2DA7C /* GalleryImage.swift */,
+				BFD1BF9C2047431E00BB2A8B /* SettingsViewController.swift */,
+				BFD1BF9E2047492B00BB2A8B /* MiccoSettings.swift */,
 			);
 			path = Micco;
 			sourceTree = "<group>";
@@ -269,10 +275,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF6491012042F6D600E2E8EB /* ViewController.swift in Sources */,
+				BFD1BF9F2047492B00BB2A8B /* MiccoSettings.swift in Sources */,
 				BF6490FF2042F6D600E2E8EB /* AppDelegate.swift in Sources */,
 				BFC577FD20454A3500C2DA7C /* GalleryImage.swift in Sources */,
 				BF99D3012043460C007739E0 /* ImageViewController.swift in Sources */,
 				BFA9CE9C20432CCF0073D050 /* CollectionViewCell.swift in Sources */,
+				BFD1BF9D2047431E00BB2A8B /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

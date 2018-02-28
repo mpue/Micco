@@ -42,6 +42,11 @@
                                             <action selector="shareImages:" destination="BYZ-38-t0r" id="x32-aE-hS6"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem title="Export" image="grid64" id="1ho-7e-USR">
+                                        <connections>
+                                            <action selector="exportThumbs:" destination="BYZ-38-t0r" id="XtW-CW-pce"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                                 <color key="tintColor" red="0.99028533551535902" green="0.98435548320688382" blue="0.99621518782383423" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </toolbar>
@@ -82,17 +87,32 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="rqC-5X-NXy"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="bqU-xR-bVf"/>
+                                </connections>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="uNf-74-ZDo"/>
+                    <navigationItem key="navigationItem" id="uNf-74-ZDo">
+                        <barButtonItem key="rightBarButtonItem" title="Settings" id="A8M-h6-9gK">
+                            <connections>
+                                <segue destination="vyc-nC-lyU" kind="show" id="dq3-pq-8hW"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
-                        <outlet property="cameraButton" destination="fam-wF-Uvs" id="JVl-at-Tlq"/>
+                        <outlet property="cameraButton" destination="WGH-hL-X2G" id="MzE-MP-Dsc"/>
+                        <outlet property="copyButton" destination="CZc-dn-QdY" id="xVW-hz-ugW"/>
+                        <outlet property="exportButton" destination="1ho-7e-USR" id="o1I-iQ-33J"/>
                         <outlet property="imageGrid" destination="uAD-b7-guQ" id="jFh-t4-8uA"/>
                         <outlet property="overlayView" destination="VCC-Va-meV" id="e4m-bq-vJQ"/>
+                        <outlet property="shareButton" destination="o56-sP-arQ" id="sbf-oq-ffY"/>
+                        <outlet property="trashButton" destination="iSA-oN-c92" id="jFJ-Bh-RB3"/>
                         <segue destination="9wE-Ul-xD5" kind="show" identifier="showImage" id="YJO-TY-Fbh"/>
+                        <segue destination="vyc-nC-lyU" kind="show" identifier="showSettings" id="em9-wu-fiY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -127,6 +147,49 @@
                 </view>
             </objects>
             <point key="canvasLocation" x="644" y="149.77511244377811"/>
+        </scene>
+        <!--Settings View Controller-->
+        <scene sceneID="KsA-LN-5fN">
+            <objects>
+                <viewController id="vyc-nC-lyU" customClass="SettingsViewController" customModule="Micco" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bbe-gz-DZF">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="e03-Hg-yTG">
+                                <rect key="frame" x="77" y="64" width="244" height="68.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Image spacing" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qy0-pP-NIQ">
+                                        <rect key="frame" x="22" y="0.0" width="200" height="38.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                        <color key="textColor" red="0.98597055718219295" green="1" blue="0.97972680519839916" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" minValue="0.0" maxValue="20" translatesAutoresizingMaskIntoConstraints="NO" id="aQb-VQ-dhn">
+                                        <rect key="frame" x="-2" y="38.5" width="248" height="31"/>
+                                        <connections>
+                                            <action selector="setImageSpacingWithSender:" destination="vyc-nC-lyU" eventType="valueChanged" id="Ifw-WB-iiP"/>
+                                        </connections>
+                                    </slider>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="aQb-VQ-dhn" firstAttribute="leading" secondItem="e03-Hg-yTG" secondAttribute="leading" id="yma-VD-Fub"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="tintColor" red="0.98597055718219295" green="1" blue="0.97972680519839916" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="QRJ-Hd-oyU" firstAttribute="trailing" secondItem="e03-Hg-yTG" secondAttribute="trailing" constant="54" id="1Cf-bx-Tye"/>
+                            <constraint firstItem="e03-Hg-yTG" firstAttribute="leading" secondItem="QRJ-Hd-oyU" secondAttribute="leading" constant="77" id="5Ua-2o-nWq"/>
+                            <constraint firstItem="e03-Hg-yTG" firstAttribute="top" secondItem="QRJ-Hd-oyU" secondAttribute="top" id="cCy-zR-g4O"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="QRJ-Hd-oyU"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Red-KL-Joa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1469.5999999999999" y="-632.83358320839591"/>
         </scene>
         <!--Image View Controller-->
         <scene sceneID="11z-Qr-rnL">
@@ -172,7 +235,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rD5-ax-Hi6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1352.8" y="149.77511244377811"/>
+            <point key="canvasLocation" x="1471" y="150"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ox9-Zt-a9l">
@@ -190,7 +253,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RLC-BZ-plB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-124" y="162"/>
+            <point key="canvasLocation" x="-207" y="150"/>
         </scene>
     </scenes>
     <resources>
@@ -198,7 +261,11 @@
         <image name="back64" width="64" height="64"/>
         <image name="camera64" width="64" height="64"/>
         <image name="copy64" width="64" height="64"/>
+        <image name="grid64" width="64" height="64"/>
         <image name="share64" width="64" height="64"/>
         <image name="trash64" width="64" height="64"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="em9-wu-fiY"/>
+    </inferredMetricsTieBreakers>
 </document>

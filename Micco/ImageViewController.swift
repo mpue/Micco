@@ -26,23 +26,25 @@ class ImageViewController : UIViewController, UIScrollViewDelegate {
         image.image = photo;
      
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action:#selector(imageTapped))
+        tapGestureRecognizer.cancelsTouchesInView = false
         image.addGestureRecognizer(tapGestureRecognizer);
         image.isUserInteractionEnabled = true
         
         adjustImage()
         
         let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.getSwipeAction(_:)))
+        rightSwipe.cancelsTouchesInView = false
         rightSwipe.direction = UISwipeGestureRecognizerDirection.right;
         self.image.addGestureRecognizer(rightSwipe)
         
         let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.getSwipeAction(_:)))
         leftSwipe.direction = UISwipeGestureRecognizerDirection.left;
+        leftSwipe.cancelsTouchesInView = false
         self.image.addGestureRecognizer(leftSwipe)
         
     }
     
     override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
-        var text=""
         orientation = UIDevice.current.orientation;
         adjustImage();
     }

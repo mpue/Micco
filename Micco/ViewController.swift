@@ -13,6 +13,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet var cameraButton: UIBarButtonItem?
+    @IBOutlet var trashButton: UIBarButtonItem?
+    @IBOutlet var copyButton: UIBarButtonItem?
+    @IBOutlet var shareButton: UIBarButtonItem?
+    @IBOutlet var exportButton: UIBarButtonItem?
     @IBOutlet var overlayView : UIView?
     @IBOutlet var imageGrid: UICollectionView?
     
@@ -30,13 +34,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         imagePicker.modalPresentationStyle = .currentContext
         imagePicker.delegate = self
         
-        imageGrid?.dataSource = self;
-        imageGrid?.delegate = self;
-        
-        imageGrid?.minimumZoomScale = 1.0
-        imageGrid?.maximumZoomScale = 6.0
-        
-        
         // Remove the camera button if the camera is not currently available.
         if !UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
             toolbarItems = self.toolbarItems?.filter { $0 != cameraButton }
@@ -44,14 +41,27 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         self.imageGrid?.isUserInteractionEnabled = true;
         self.imageGrid?.allowsMultipleSelection = true;
+        self.imageGrid?.allowsSelection = true;
         
-        let lpgr = UILongPressGestureRecognizer(target: self, action: #selector(self.handleLongPress))
+        /*
+        
+        let lpgr = UILongPressGestureRecognizer(target: self, action: #selector(self.imageTapped))
+        lpgr.cancelsTouchesInView = false
         self.imageGrid?.addGestureRecognizer(lpgr);
+        */
         
+        /*
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.imageTapped))
+        tapGestureRecognizer.cancelsTouchesInView = false
         self.imageGrid?.addGestureRecognizer(tapGestureRecognizer);
-    
+         */
         loadThumbnails();
+        
+        self.trashButton?.isEnabled = false;
+        self.copyButton?.isEnabled = false;
+        self.shareButton?.isEnabled = false;
+        self.exportButton?.isEnabled = false;
+        
 
     }
     
@@ -124,12 +134,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let controller = segue.destination as? ImageViewController;
-        // self.navigationController?.pushViewController(self, animated: true)
-        let cell = sender as! CollectionViewCell;
-        controller?.gallery = self.gallery;
-        controller?.photo = (cell.fullImage?.image)!;
         
+        if (segue.destination is ImageViewController) {
+            let controller = segue.destination as? ImageViewController;
+            // self.navigationController?.pushViewController(self, animated: true)
+            let cell = sender as! CollectionViewCell;
+            controller?.gallery = self.gallery;
+            controller?.photo = (cell.fullImage?.image)!;
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -147,7 +159,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         for path in indexPaths! {
             
-            var image = gallery[path.first!];
+            var image = gallery[path.item];
             var fileUrl = NSURL(fileURLWithPath: image.imagePath!);
             objectsToShare.append(fileUrl as URL);
             
@@ -164,7 +176,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         for path in indexPaths! {
             
-            var image = gallery[path.first!];
+            var image = gallery[path.item];
             UIImageWriteToSavedPhotosAlbum(image.image!,self,#selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
         
         }
@@ -183,6 +195,52 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             ac.addAction(UIAlertAction(title: "OK", style: .default))
             present(ac, animated: true)
         }
+    }
+    
+    @IBAction func exportThumbs(_ sender: UIBarButtonItem) {
+        let indexPaths = self.imageGrid?.indexPathsForSelectedItems;
+        let numImages = Double((indexPaths?.count)!);
+        
+        let columns = Int(sqrt(numImages));
+        let rows = Int(Int(numImages) / columns) + 1;
+ 
+        // The computed image needs top be larger because of the image padding in between
+        let bordersize = CGFloat(MiccoSettings.instance.imageSpacing);
+        
+        // actually this is n times the image width/height + one additional border
+        let borderVertical = CGFloat(CGFloat(rows) * bordersize + bordersize)
+        let borderHorizontal = CGFloat(CGFloat(columns) * bordersize + bordersize)
+        
+        let size = CGSize(width: 256 * CGFloat(columns) + borderHorizontal, height: 256 * CGFloat(rows) + borderVertical)
+        
+        UIGraphicsBeginImageContext(size)
+
+        var col = 0;
+        var row = 0;
+        
+        for path in indexPaths! {
+            
+            let image = gallery[path.item];
+
+            
+            let areaSize = CGRect( x : CGFloat(col * 256) + bordersize, y : CGFloat(row * 256) + bordersize,width: CGFloat(256) - bordersize, height: CGFloat(256) - bordersize);
+            
+            image.thumb?.draw(in: areaSize, blendMode: CGBlendMode.normal, alpha: CGFloat(1));
+            
+            if (col < columns - 1) {
+                col = col + 1;
+            }
+            else {
+                col = 0;
+                row = row + 1;
+            }
+            
+        }
+        
+        let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        
+        UIImageWriteToSavedPhotosAlbum(newImage,self,#selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
     }
     
     @IBAction func deleteSelected(_ sender: UIBarButtonItem) {
@@ -328,9 +386,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let thbImgPath = URL(fileURLWithPath: documentDirectoryPath.appendingPathComponent("\(gallery.count)_thumb.jpg"))
         
         do {
-            let imageData = UIImagePNGRepresentation(image as! UIImage)!
+            
+            let imageData = UIImagePNGRepresentation(rotateImage(image : image as! UIImage))!
+            
             let options = [
-                kCGImageSourceCreateThumbnailWithTransform: true,
+                kCGImageSourceCreateThumbnailWithTransform: false,
                 kCGImageSourceCreateThumbnailFromImageAlways: true,
                 kCGImageSourceThumbnailMaxPixelSize: 256] as CFDictionary
             let source = CGImageSourceCreateWithData(imageData as CFData, nil)!
@@ -347,6 +407,27 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         catch let error{
             print(error.localizedDescription)
         }
+    }
+    
+    func rotateImage(image:UIImage) -> UIImage
+    {
+        var rotatedImage = UIImage()
+        switch UIDevice.current.orientation
+        {
+        case .portrait:
+            rotatedImage = UIImage(cgImage: image.cgImage!, scale: 1.0, orientation: .right)
+            
+        case .portraitUpsideDown:
+            rotatedImage = UIImage(cgImage: image.cgImage!, scale: 1.0, orientation: .left)
+            
+        case .landscapeLeft:
+            rotatedImage = UIImage(cgImage: image.cgImage!, scale: 1.0, orientation: .up)
+            
+        default:
+            rotatedImage = UIImage(cgImage: image.cgImage!, scale: 1.0, orientation: .down)
+        }
+        
+        return rotatedImage
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -367,6 +448,19 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
         
         return cell;
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        let enabled = (imageGrid?.indexPathsForSelectedItems?.count)! > 0;
+        trashButton?.isEnabled = enabled
+        copyButton?.isEnabled = enabled
+        shareButton?.isEnabled = enabled
+        exportButton?.isEnabled = enabled
+        return true;
     }
     
     
