@@ -139,8 +139,27 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         showImagePickerForCamera(cameraButton!);
     }
     
-    @IBAction func copyToGallery(_ sender: UIBarButtonItem) {
+    
+    @IBAction func shareImages(_ sender: UIBarButtonItem) {
+        let indexPaths = self.imageGrid?.indexPathsForSelectedItems;
         
+        var objectsToShare : [URL] = [];
+        
+        for path in indexPaths! {
+            
+            var image = gallery[path.first!];
+            var fileUrl = NSURL(fileURLWithPath: image.imagePath!);
+            objectsToShare.append(fileUrl as URL);
+            
+        }
+        
+        let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+        
+        self.present(activityVC, animated: true, completion: nil)
+    }
+    
+    @IBAction func copyToGallery(_ sender: UIBarButtonItem) {
+    
         let indexPaths = self.imageGrid?.indexPathsForSelectedItems;
         
         for path in indexPaths! {
@@ -149,7 +168,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             UIImageWriteToSavedPhotosAlbum(image.image!,self,#selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
         
         }
-
     }
     
     

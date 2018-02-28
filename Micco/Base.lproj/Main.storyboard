@@ -37,6 +37,11 @@
                                             <action selector="copyToGallery:" destination="BYZ-38-t0r" id="gPT-oS-AaH"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem title="Share" image="share64" id="o56-sP-arQ">
+                                        <connections>
+                                            <action selector="shareImages:" destination="BYZ-38-t0r" id="x32-aE-hS6"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                                 <color key="tintColor" red="0.99028533551535902" green="0.98435548320688382" blue="0.99621518782383423" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </toolbar>
@@ -193,6 +198,7 @@
         <image name="back64" width="64" height="64"/>
         <image name="camera64" width="64" height="64"/>
         <image name="copy64" width="64" height="64"/>
+        <image name="share64" width="64" height="64"/>
         <image name="trash64" width="64" height="64"/>
     </resources>
 </document>
