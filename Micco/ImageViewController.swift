@@ -16,7 +16,7 @@ class ImageViewController : UIViewController, UIScrollViewDelegate {
     var gallery : [GalleryImage]?;
     var currentIndex : Int = 0;
     var photo:UIImage = UIImage();
-
+    var orientation : UIDeviceOrientation = UIDevice.current.orientation;
     
     override func viewDidLoad() {
     
@@ -29,16 +29,7 @@ class ImageViewController : UIViewController, UIScrollViewDelegate {
         image.addGestureRecognizer(tapGestureRecognizer);
         image.isUserInteractionEnabled = true
         
-        let width = photo.size.width;
-        let height =  photo.size.height;
-        
-        if width > height {
-            image.contentMode = .scaleAspectFit
-            //since the width > height we may fit it and we'll have bands on top/bottom
-        } else {
-            image.contentMode = .scaleAspectFill
-            //width < height we fill it until width is taken up and clipped on top/bottom
-        }
+        adjustImage()
         
         let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.getSwipeAction(_:)))
         rightSwipe.direction = UISwipeGestureRecognizerDirection.right;
@@ -50,6 +41,11 @@ class ImageViewController : UIViewController, UIScrollViewDelegate {
         
     }
     
+    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
+        var text=""
+        orientation = UIDevice.current.orientation;
+        adjustImage();
+    }
     
     @objc func getSwipeAction( _ recognizer : UISwipeGestureRecognizer){
         
@@ -83,6 +79,35 @@ class ImageViewController : UIViewController, UIScrollViewDelegate {
                                   completion: nil)
             }
         }
+        
+        adjustImage();
+    }
+    
+    func adjustImage() {
+        image.contentMode = .scaleAspectFit
+        /*
+        let width = (image.image?.size.width)!;
+        let height =  (image.image?.size.height)!;
+        
+        if width > height {
+            if (orientation == .landscapeLeft || orientation == .landscapeRight) {
+                image.contentMode = .scaleAspectFit
+            }
+            else if (orientation == .portrait || orientation == .portraitUpsideDown) {
+                image.contentMode = .scaleAspectFill
+            }
+            
+        } else {
+            if (orientation == .landscapeLeft || orientation == .landscapeRight) {
+                 image.contentMode = .scaleAspectFill
+            }
+            else if (orientation == .portrait || orientation == .portraitUpsideDown) {
+                 image.contentMode = .scaleAspectFit
+            }
+           
+            //width < height we fill it until width is taken up and clipped on top/bottom
+        }
+         */
     }
     
     @objc func imageTapped(sender: Any)

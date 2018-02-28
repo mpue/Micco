@@ -22,17 +22,17 @@
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
-                                    <barButtonItem title="Camera" id="WGH-hL-X2G">
+                                    <barButtonItem title="Camera" image="camera64" width="64" id="WGH-hL-X2G">
                                         <connections>
                                             <action selector="showCamera:" destination="BYZ-38-t0r" id="Aje-2e-2iY"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="Delete" id="iSA-oN-c92">
+                                    <barButtonItem title="Delete" image="trash64" width="64" id="iSA-oN-c92">
                                         <connections>
                                             <action selector="deleteSelected:" destination="BYZ-38-t0r" id="rcr-PJ-r54"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="Copy" id="CZc-dn-QdY">
+                                    <barButtonItem title="Copy" image="copy64" width="64" id="CZc-dn-QdY">
                                         <connections>
                                             <action selector="copyToGallery:" destination="BYZ-38-t0r" id="gPT-oS-AaH"/>
                                         </connections>
@@ -95,15 +95,15 @@
                     <rect key="frame" x="0.0" y="0.0" width="382" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" misplaced="YES" barStyle="blackTranslucent" translatesAutoresizingMaskIntoConstraints="NO" id="RHT-37-40X">
+                        <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleAspectFit" misplaced="YES" barStyle="blackTranslucent" translatesAutoresizingMaskIntoConstraints="NO" id="RHT-37-40X">
                             <rect key="frame" x="0.0" y="0.0" width="382" height="44"/>
                             <items>
-                                <barButtonItem title="Snap" id="fam-wF-Uvs">
+                                <barButtonItem title="Snap" image="camera64" width="64" id="fam-wF-Uvs">
                                     <connections>
                                         <action selector="takePhoto:" destination="BYZ-38-t0r" id="qqB-p5-IaR"/>
                                     </connections>
                                 </barButtonItem>
-                                <barButtonItem title="Back" id="uTL-lV-0Ti">
+                                <barButtonItem title="Back" image="back64" width="64" id="uTL-lV-0Ti">
                                     <connections>
                                         <action selector="backToMain:" destination="BYZ-38-t0r" id="Aty-yI-dfI"/>
                                     </connections>
@@ -134,7 +134,7 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fvk-KA-cM8">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hb5-rN-uq2">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hb5-rN-uq2">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                     </imageView>
                                 </subviews>
@@ -190,5 +190,9 @@
     </scenes>
     <resources>
         <image name="Check" width="256" height="256"/>
+        <image name="back64" width="64" height="64"/>
+        <image name="camera64" width="64" height="64"/>
+        <image name="copy64" width="64" height="64"/>
+        <image name="trash64" width="64" height="64"/>
     </resources>
 </document>

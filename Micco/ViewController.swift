@@ -320,6 +320,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             let thumbnail = UIImage(cgImage: imageReference)
             
             galleryImage.thumb = thumbnail;
+            galleryImage.thumbPath = thbImgPath.absoluteString;
+            galleryImage.imagePath = imgPath.absoluteString;
             
             try UIImageJPEGRepresentation(thumbnail as! UIImage, 1.0)?.write(to: thbImgPath, options: .atomic)
             try UIImageJPEGRepresentation(image as! UIImage, 1.0)?.write(to: imgPath, options: .atomic)
