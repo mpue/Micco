@@ -3,10 +3,24 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "ViewController.imageTapped(tapGestureRecognizer:):ViewController.swift">
+         contextName = "PickerImage.createImageFromData(_:height:):PickerImage.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.currentCell">
+               value = "mutableData">
+            </PersistentString>
+            <PersistentString
+               value = "provider">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.deleteSelected(_:):ViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "gallery">
+            </PersistentString>
+            <PersistentString
+               value = "cell">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -19,13 +33,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "ViewController.deleteSelected(_:):ViewController.swift">
+         contextName = "ViewController.imageTapped(tapGestureRecognizer:):ViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "gallery">
-            </PersistentString>
-            <PersistentString
-               value = "cell">
+               value = "self.currentCell">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

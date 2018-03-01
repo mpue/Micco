@@ -176,6 +176,28 @@
                                     <constraint firstItem="aQb-VQ-dhn" firstAttribute="leading" secondItem="e03-Hg-yTG" secondAttribute="leading" id="yma-VD-Fub"/>
                                 </constraints>
                             </stackView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qdF-jP-zpO" customClass="ColorPicker" customModule="Micco" customModuleProvider="target">
+                                <rect key="frame" x="16" y="274" width="343" height="373"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                                        <color key="value" red="1" green="0.30196403555917917" blue="0.24554406376860383" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                                        <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eMH-q8-tr9" customClass="HuePicker" customModule="Micco" customModuleProvider="target">
+                                <rect key="frame" x="16" y="141" width="343" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ezc-aG-U6t" customClass="ColorWell" customModule="Micco" customModuleProvider="target">
+                                <rect key="frame" x="16" y="208" width="148" height="52"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                         <color key="tintColor" red="0.98597055718219295" green="1" blue="0.97972680519839916" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -186,6 +208,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="QRJ-Hd-oyU"/>
                     </view>
+                    <connections>
+                        <outlet property="color" destination="qdF-jP-zpO" id="aYV-Wa-S34"/>
+                        <outlet property="colorWell" destination="Ezc-aG-U6t" id="NuI-oM-P3k"/>
+                        <outlet property="hue" destination="eMH-q8-tr9" id="AmA-gs-29M"/>
+                        <outlet property="slider" destination="aQb-VQ-dhn" id="duj-Pw-Us1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Red-KL-Joa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
