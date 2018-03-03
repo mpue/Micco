@@ -177,7 +177,7 @@
                                 </constraints>
                             </stackView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qdF-jP-zpO" customClass="ColorPicker" customModule="Micco" customModuleProvider="target">
-                                <rect key="frame" x="16" y="274" width="343" height="373"/>
+                                <rect key="frame" x="16" y="274" width="343" height="307"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
@@ -198,6 +198,12 @@
                                 <rect key="frame" x="16" y="208" width="148" height="52"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </button>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="swn-oZ-SiO">
+                                <rect key="frame" x="16" y="589" width="343" height="50"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                         <color key="tintColor" red="0.98597055718219295" green="1" blue="0.97972680519839916" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -211,6 +217,7 @@
                     <connections>
                         <outlet property="color" destination="qdF-jP-zpO" id="aYV-Wa-S34"/>
                         <outlet property="colorWell" destination="Ezc-aG-U6t" id="NuI-oM-P3k"/>
+                        <outlet property="filterPicker" destination="swn-oZ-SiO" id="fSx-g1-qEr"/>
                         <outlet property="hue" destination="eMH-q8-tr9" id="AmA-gs-29M"/>
                         <outlet property="slider" destination="aQb-VQ-dhn" id="duj-Pw-Us1"/>
                     </connections>

@@ -12,6 +12,7 @@
 		BF3219712048254A00464620 /* ColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF32196C2048254900464620 /* ColorPicker.swift */; };
 		BF3219722048254A00464620 /* ColorPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF32196D2048254900464620 /* ColorPickerController.swift */; };
 		BF3219732048254A00464620 /* PickerImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF32196E2048254A00464620 /* PickerImage.swift */; };
+		BF32197520484FFF00464620 /* ImageFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF32197420484FFF00464620 /* ImageFilters.swift */; };
 		BF6490FF2042F6D600E2E8EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6490FE2042F6D600E2E8EB /* AppDelegate.swift */; };
 		BF6491012042F6D600E2E8EB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6491002042F6D600E2E8EB /* ViewController.swift */; };
 		BF6491042042F6D600E2E8EB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF6491022042F6D600E2E8EB /* Main.storyboard */; };
@@ -50,6 +51,7 @@
 		BF32196C2048254900464620 /* ColorPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPicker.swift; sourceTree = "<group>"; };
 		BF32196D2048254900464620 /* ColorPickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPickerController.swift; sourceTree = "<group>"; };
 		BF32196E2048254A00464620 /* PickerImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerImage.swift; sourceTree = "<group>"; };
+		BF32197420484FFF00464620 /* ImageFilters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFilters.swift; sourceTree = "<group>"; };
 		BF6490FB2042F6D600E2E8EB /* Micco.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Micco.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF6490FE2042F6D600E2E8EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BF6491002042F6D600E2E8EB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 				BFD1BF9C2047431E00BB2A8B /* SettingsViewController.swift */,
 				BFD1BF9E2047492B00BB2A8B /* MiccoSettings.swift */,
 				BF7CF2C62048048A002B6A9A /* SimpleColorPicker.swift */,
+				BF32197420484FFF00464620 /* ImageFilters.swift */,
 			);
 			path = Micco;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF32196F2048254A00464620 /* HuePicker.swift in Sources */,
+				BF32197520484FFF00464620 /* ImageFilters.swift in Sources */,
 				BF3219732048254A00464620 /* PickerImage.swift in Sources */,
 				BF3219702048254A00464620 /* ColorWell.swift in Sources */,
 				BF6491012042F6D600E2E8EB /* ViewController.swift in Sources */,

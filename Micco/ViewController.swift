@@ -202,19 +202,23 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let numImages = Double((indexPaths?.count)!);
         
         let columns = Int(sqrt(numImages));
-        let rows = Int(Int(numImages) / columns) + 1;
+        let rows = Int(Int(numImages) / columns);
  
         // The computed image needs top be larger because of the image padding in between
         let bordersize = CGFloat(MiccoSettings.instance.imageSpacing);
         
         // actually this is n times the image width/height + one additional border
-        let borderVertical = CGFloat(CGFloat(rows) * bordersize + bordersize)
-        let borderHorizontal = CGFloat(CGFloat(columns) * bordersize + bordersize)
+        let borderVertical = CGFloat(CGFloat(rows - 1) * bordersize) - bordersize;
+        let borderHorizontal = CGFloat(CGFloat(columns - 1) * bordersize) - bordersize;
         
         let size = CGSize(width: 256 * CGFloat(columns) + borderHorizontal, height: 256 * CGFloat(rows) + borderVertical)
         
         UIGraphicsBeginImageContext(size)
 
+        let context = UIGraphicsGetCurrentContext();
+        context?.setFillColor(MiccoSettings.instance.backgroundColor.cgColor)
+        context!.fill(CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        
         var col = 0;
         var row = 0;
         

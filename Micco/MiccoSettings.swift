@@ -6,12 +6,12 @@
 //  Copyright © 2018 Private. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class MiccoSettings {
     
     static let instance = MiccoSettings();
     
     var imageSpacing : Int = 0;
-    
+    var backgroundColor : UIColor = UIColor.gray;
 }
