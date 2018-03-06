@@ -10,8 +10,6 @@ import UIKit
 
 
 class SettingsViewController : UIViewController,UIPickerViewDelegate, UIPickerViewDataSource {
-
-    
     
     @IBOutlet var slider: UISlider?;
     @IBOutlet var hue: HuePicker?;

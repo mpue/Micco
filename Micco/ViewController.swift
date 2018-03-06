@@ -19,8 +19,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet var exportButton: UIBarButtonItem?
     @IBOutlet var overlayView : UIView?
     @IBOutlet var imageGrid: UICollectionView?
+    @IBOutlet var toggleSelectButton: UIBarButtonItem?
     
-    var gallery = [GalleryImage]();
+    var selectMode = false;
+    
+    var currentSection = Int(0);
+    
+    var gallery = [[GalleryImage]]();
     
     var imagePicker = UIImagePickerController();
     
@@ -43,18 +48,23 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         self.imageGrid?.allowsMultipleSelection = true;
         self.imageGrid?.allowsSelection = true;
         
-        /*
         
+        /*
         let lpgr = UILongPressGestureRecognizer(target: self, action: #selector(self.imageTapped))
         lpgr.cancelsTouchesInView = false
         self.imageGrid?.addGestureRecognizer(lpgr);
+        
         */
         
-        /*
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.imageTapped))
-        tapGestureRecognizer.cancelsTouchesInView = false
+        tapGestureRecognizer.cancelsTouchesInView = true
         self.imageGrid?.addGestureRecognizer(tapGestureRecognizer);
-         */
+        
+        
+        let defaultGallery = [GalleryImage]();
+        
+        gallery.append(defaultGallery);
+        
         loadThumbnails();
         
         self.trashButton?.isEnabled = false;
@@ -85,7 +95,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                     galleryImage.image = image;
                     galleryImage.imagePath = url.path;
                     galleryImage.thumbPath = thumbPath;
-                    gallery.append(galleryImage);
+                    gallery[currentSection].append(galleryImage);
                     
                 }
                 
@@ -109,7 +119,22 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             let cell = self.imageGrid?.cellForItem(at: indexPath)
             self.currentCell = cell as! CollectionViewCell
             self.currentCell.imageIndex =  indexPath.first;
-            self.performSegue(withIdentifier: "showImage", sender: self.currentCell);
+            
+            if (selectMode) {
+                if (self.currentCell.isSelected) {
+                    self.imageGrid?.deselectItem(at: indexPath, animated: true);
+                }
+                else {
+                    self.imageGrid?.selectItem(at: indexPath, animated: true, scrollPosition: UICollectionViewScrollPosition.centeredHorizontally)
+                }
+                
+
+                self.checkToolbarState();
+            }
+            else {
+                self.performSegue(withIdentifier: "showImage", sender: self.currentCell);
+            }
+
             
         } else {
             print("couldn't find index path")
@@ -139,7 +164,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             let controller = segue.destination as? ImageViewController;
             // self.navigationController?.pushViewController(self, animated: true)
             let cell = sender as! CollectionViewCell;
-            controller?.gallery = self.gallery;
+            controller?.gallery = self.gallery[currentSection];
             controller?.photo = (cell.fullImage?.image)!;
         }
     }
@@ -159,7 +184,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         for path in indexPaths! {
             
-            var image = gallery[path.item];
+            var image = gallery[currentSection][path.item];
             var fileUrl = NSURL(fileURLWithPath: image.imagePath!);
             objectsToShare.append(fileUrl as URL);
             
@@ -176,7 +201,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         for path in indexPaths! {
             
-            var image = gallery[path.item];
+            var image = gallery[currentSection][path.item];
             UIImageWriteToSavedPhotosAlbum(image.image!,self,#selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
         
         }
@@ -224,9 +249,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         for path in indexPaths! {
             
-            let image = gallery[path.item];
+            let image = gallery[currentSection][path.item];
 
-            
             let areaSize = CGRect( x : CGFloat(col * 256) + bordersize, y : CGFloat(row * 256) + bordersize,width: CGFloat(256) - bordersize, height: CGFloat(256) - bordersize);
             
             image.thumb?.draw(in: areaSize, blendMode: CGBlendMode.normal, alpha: CGFloat(1));
@@ -253,11 +277,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         for path in indexPaths! {
             
-            var image = gallery[path.first!];
+            var image = gallery[currentSection][path.first!];
             
             removeImage(filePath: image.imagePath!);
             removeImage(filePath: image.thumbPath!);
-            self.gallery.remove(at: path.first!);
+            self.gallery[currentSection].remove(at: path.first!);
         }
         self.imageGrid?.performBatchUpdates({
              self.imageGrid?.deleteItems(at: indexPaths!)
@@ -279,6 +303,19 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             try fileManager.removeItem(atPath: filePath)
         } catch let error as NSError {
             print(error.debugDescription)
+        }
+        
+    }
+    
+    @IBAction func toggleSelect(_ sender: UIBarButtonItem) {
+        
+        selectMode = !selectMode;
+        
+        if (selectMode) {
+            sender.title = "Cancel";
+        }
+        else {
+            sender.title = "Select";
         }
         
     }
@@ -381,13 +418,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let image = info[UIImagePickerControllerOriginalImage]
         let galleryImage = GalleryImage();
         galleryImage.image = image as? UIImage;
-        gallery.append(galleryImage)
+        gallery[currentSection].append(galleryImage)
        
         
         let documentDirectoryPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
 
-        let imgPath = URL(fileURLWithPath: documentDirectoryPath.appendingPathComponent("\(gallery.count).jpg"))
-        let thbImgPath = URL(fileURLWithPath: documentDirectoryPath.appendingPathComponent("\(gallery.count)_thumb.jpg"))
+        let imgPath = URL(fileURLWithPath: documentDirectoryPath.appendingPathComponent("\(gallery[currentSection].count).jpg"))
+        let thbImgPath = URL(fileURLWithPath: documentDirectoryPath.appendingPathComponent("\(gallery[currentSection].count)_thumb.jpg"))
         
         do {
             
@@ -439,19 +476,27 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return `self`.gallery.count;
+        return `self`.gallery[section].count;
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionViewCell", for: indexPath) as! CollectionViewCell
         
-        if (indexPath.row < `self`.gallery.count) {
-            cell.fullImage = self.gallery[indexPath.row]
-            cell.displayContent( img : self.gallery[indexPath.row]);
+        if (indexPath.row < `self`.gallery[currentSection].count) {
+            cell.fullImage = self.gallery[currentSection][indexPath.row]
+            cell.displayContent( img : self.gallery[currentSection][indexPath.row]);
         }
         
         return cell;
+    }
+    
+    func checkToolbarState() {
+        let enabled = (imageGrid?.indexPathsForSelectedItems?.count)! > 0;
+        trashButton?.isEnabled = enabled
+        copyButton?.isEnabled = enabled
+        shareButton?.isEnabled = enabled
+        exportButton?.isEnabled = enabled
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -459,11 +504,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        let enabled = (imageGrid?.indexPathsForSelectedItems?.count)! > 0;
-        trashButton?.isEnabled = enabled
-        copyButton?.isEnabled = enabled
-        shareButton?.isEnabled = enabled
-        exportButton?.isEnabled = enabled
         return true;
     }
     
