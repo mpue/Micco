@@ -413,6 +413,28 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         imagePicker.takePicture();
 
     }
+
+    func sectionDirectoryExists(name : String) -> Bool {
+        
+        let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
+        let documentsDirectory: AnyObject = paths[0] as AnyObject
+        let dataPath = documentsDirectory.appendingPathComponent(name)!
+        
+        return FileManager.default.fileExists(atPath: dataPath.absoluteString)
+        
+    }
+    
+    func createDirectoryForSection(name : String) {
+        let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
+        let documentsDirectory: AnyObject = paths[0] as AnyObject
+        let dataPath = documentsDirectory.appendingPathComponent(name)!
+        
+        do {
+            try FileManager.default.createDirectory(atPath: dataPath.absoluteString, withIntermediateDirectories: false, attributes: nil)
+        } catch let error as NSError {
+            print(error.localizedDescription);
+        }
+    }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let image = info[UIImagePickerControllerOriginalImage]
@@ -422,6 +444,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
        
         
         let documentDirectoryPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
+        
+        
 
         let imgPath = URL(fileURLWithPath: documentDirectoryPath.appendingPathComponent("\(gallery[currentSection].count).jpg"))
         let thbImgPath = URL(fileURLWithPath: documentDirectoryPath.appendingPathComponent("\(gallery[currentSection].count)_thumb.jpg"))
